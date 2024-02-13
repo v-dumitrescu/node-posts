@@ -1,0 +1,18 @@
+{
+  "name": "node-posts",
+  "version": "1.0.0",
+  "description": "A very simple node.js CRUD web application with user authentication",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "author": "Valentin Dumitrescu",
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}
