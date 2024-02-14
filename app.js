@@ -7,6 +7,8 @@ mongoose.connect('mongodb://localhost/node-posts')
   .then(() => console.log('Connected to MongoDB...'))
   .catch(err => console.log(err));
 
+const Post = require('./models/Post');
+
 app.set('view engine', 'pug');
 
 app.get('/', (req, res) => {
@@ -18,7 +20,12 @@ app.get('/about', (req, res) => {
 });
 
 app.get('/posts', (req, res) => {
-  
+  Post.find({})
+    .then(posts => {
+      res.render('posts/posts', {
+        posts
+      });
+    });
 });
 
 app.get('/posts/create', (req, res) => {
