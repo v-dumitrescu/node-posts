@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const methodOverride = require('method-override');
 
 const mongoose = require('mongoose');
 
@@ -11,6 +12,7 @@ mongoose.connect('mongodb://localhost/node-posts')
 const Post = require('./models/Post');
 
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(methodOverride('_method'));
 app.set('view engine', 'pug');
 
 app.get('/', (req, res) => {
@@ -70,7 +72,12 @@ app.put('/posts/edit/:id', (req, res) => {
 });
 
 app.delete('/posts/delete/:id', (req, res) => {
-
+  const { id } = req.params;
+  Post.deleteOne({
+    _id: id
+  })
+  .then(() => res.redirect('/posts'))
+  .catch(err => console.log(err));
 });
 
 const port = 8080;
