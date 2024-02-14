@@ -1,8 +1,8 @@
-form
+form(method=method, action=action)
   .mb-3
     label.form-label(for='title') Title
-    input#title.form-control(type='text', required)
+    input#title.form-control(type='text', name='title', value=title ? title : '', required)
   .mb-3
-    label.form-label(for='content', required) Content
-    textarea#content.form-control(rows=10, required)
-  button.btn.btn-primary(type='submit') Submit
+    label.form-label(for='content') Content
+    textarea#content.form-control(rows=10, name='content', required) #{content ? content : ''}
+    button.btn.btn-primary(type='submit') Submit
