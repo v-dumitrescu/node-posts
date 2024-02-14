@@ -29,11 +29,14 @@ app.get('/posts', (req, res) => {
 });
 
 app.get('/posts/create', (req, res) => {
-  
+  const title = 'Create Post';
+  res.render('posts/post-form', {
+    title
+  });
 });
 
 app.post('/posts/create', (req, res) => {
-
+  
 });
 
 app.get('/posts/edit/:id', (req, res) => {
