@@ -12,7 +12,7 @@ block content
           else 
             p.card-text #{post.content}
           .float-end
-            a.btn.btn-primary.m-2(href='#') Edit
+            a.btn.btn-primary.m-2(href='/posts/edit/'+post._id) Edit
             form.d-inline(method='POST', action='/posts/delete/'+post._id+'?_method=DELETE')
               button.btn.btn-danger Delete
   else 

@@ -11,7 +11,7 @@ mongoose.connect('mongodb://localhost/node-posts')
 
 const Post = require('./models/Post');
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 app.set('view engine', 'pug');
 
@@ -43,7 +43,7 @@ app.get('/posts/create', (req, res) => {
 app.post('/posts/create', (req, res) => {
   const formTitle = 'Create Post';
   const { title, content } = req.body;
-  if(!title.trim() || !content.trim()) {
+  if (!title.trim() || !content.trim()) {
     res.render('posts/post-form', {
       formTitle,
       method: 'POST',
@@ -57,18 +57,45 @@ app.post('/posts/create', (req, res) => {
       title,
       content
     })
-    .save()
-    .then(() => res.redirect('/posts'))
-    .catch(err => console.log(err));
+      .save()
+      .then(() => res.redirect('/posts'))
+      .catch(err => console.log(err));
   }
 });
 
 app.get('/posts/edit/:id', (req, res) => {
-  
+  const { id } = req.params;
+  const formTitle = 'Edit Post';
+  Post.findOne({
+    _id: id
+  })
+    .then(post => {
+      const { title, content } = post;
+      res.render('posts/post-form', {
+        formTitle,
+        method: 'POST',
+        action: '/posts/edit/' + post._id + '?_method=PUT',
+        title,
+        content
+      });
+    })
+    .catch(err => console.log(err));
 });
 
 app.put('/posts/edit/:id', (req, res) => {
-
+  const { title, content } = req.body;
+  if (!title.trim() || !content.trim()) {
+    res.redirect('/posts/edit/'+req.params.id);
+  } else {
+    Post.updateOne({
+      _id: req.params.id
+    }, {
+      title,
+      content
+    })
+      .then(() => res.redirect('/posts'))
+      .catch(err => console.log(err));
+  }
 });
 
 app.delete('/posts/delete/:id', (req, res) => {
@@ -76,8 +103,8 @@ app.delete('/posts/delete/:id', (req, res) => {
   Post.deleteOne({
     _id: id
   })
-  .then(() => res.redirect('/posts'))
-  .catch(err => console.log(err));
+    .then(() => res.redirect('/posts'))
+    .catch(err => console.log(err));
 });
 
 const port = 8080;
