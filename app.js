@@ -1,19 +1,15 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
-const methodOverride = require('method-override');
-
 // Database connection
 require('./config/connection');
 
+// Express function call
+const app = require('./config/setup');
+
+// Index and About routes
 const pagesRouter = require('./routes/pages');
-const postsRouter = require('./routes/posts');
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(methodOverride('_method'));
-app.set('view engine', 'pug');
-
 app.use('/', pagesRouter);
+
+// Posts Routes
+const postsRouter = require('./routes/posts');
 app.use('/posts', postsRouter);
 
 const port = 8080;
