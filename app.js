@@ -5,6 +5,7 @@ const methodOverride = require('method-override');
 
 const mongoose = require('mongoose');
 
+const pagesRouter = require('./routes/pages');
 const postsRouter = require('./routes/posts');
 
 mongoose.connect('mongodb://localhost/node-posts')
@@ -15,14 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 app.set('view engine', 'pug');
 
-app.get('/', (req, res) => {
-  res.render('pages/index');
-});
-
-app.get('/about', (req, res) => {
-  res.render('pages/about');
-});
-
+app.use('/', pagesRouter);
 app.use('/posts', postsRouter);
 
 const port = 8080;
