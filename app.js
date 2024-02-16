@@ -3,14 +3,11 @@ const bodyParser = require('body-parser');
 const app = express();
 const methodOverride = require('method-override');
 
-const mongoose = require('mongoose');
+// Database connection
+require('./config/connection');
 
 const pagesRouter = require('./routes/pages');
 const postsRouter = require('./routes/posts');
-
-mongoose.connect('mongodb://localhost/node-posts')
-  .then(() => console.log('Connected to MongoDB...'))
-  .catch(err => console.log(err));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
