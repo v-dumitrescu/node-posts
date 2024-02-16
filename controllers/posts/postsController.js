@@ -13,7 +13,9 @@ const getCreatePostForm = (req, res) => {
   const formTitle = 'Create Post';
   res.render('posts/post-form', {
     formTitle,
-    method: 'POST'
+    method: 'POST',
+    title: req.query.title ? req.query.title : '',
+    content: req.query.content ? req.query.content : ''
   });
 }
 
@@ -21,21 +23,18 @@ const createPost = (req, res) => {
   const formTitle = 'Create Post';
   const { title, content } = req.body;
   if (!title.trim() || !content.trim()) {
-    res.render('posts/post-form', {
-      formTitle,
-      method: 'POST',
-      action: '/posts/create',
-      title,
-      content,
-      error: 'Both fields are required!'
-    });
+    req.flash('error_msg', 'Both fields are required!');
+    res.redirect('/posts/create?title='+title+'&content='+content);
   } else {
     new Post({
       title,
       content
     })
       .save()
-      .then(() => res.redirect('/posts'))
+      .then(() => {
+        req.flash('success_msg', 'Post created!');
+        res.redirect('/posts');
+      })
       .catch(err => console.log(err));
   }
 }
@@ -63,6 +62,7 @@ const getEditPostForm = (req, res) => {
 const editPost = (req, res) => {
   const { title, content } = req.body;
   if (!title.trim() || !content.trim()) {
+    req.flash('error_msg', 'Both fields are required!');
     res.redirect('/posts/edit/' + req.params.id);
   } else {
     Post.updateOne({
@@ -71,7 +71,10 @@ const editPost = (req, res) => {
       title,
       content
     })
-      .then(() => res.redirect('/posts'))
+      .then(() => {
+        req.flash('success_msg', 'Post updated!');
+        res.redirect('/posts');
+      })
       .catch(err => console.log(err));
   }
 }
@@ -81,7 +84,10 @@ const deletePost = (req, res) => {
   Post.deleteOne({
     _id: id
   })
-    .then(() => res.redirect('/posts'))
+    .then(() => {
+      req.flash('success_msg', 'Post deleted!');
+      res.redirect('/posts')
+    })
     .catch(err => console.log(err));
 }
 
