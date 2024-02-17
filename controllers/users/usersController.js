@@ -6,6 +6,10 @@ const getRegisterForm = (req, res) => {
   res.render('users/register');
 };
 
+const registerUser = (req, res) => {
+
+};
+
 module.exports = {
   getLoginForm,
   getRegisterForm
