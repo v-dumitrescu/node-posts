@@ -12,6 +12,10 @@ app.use('/', pagesRouter);
 const postsRouter = require('./routes/posts');
 app.use('/posts', postsRouter);
 
+// Users Routes
+const usersRouter = require('./routes/users');
+app.use('/users', usersRouter);
+
 const port = 8080;
 app.listen(port, () => {
   console.log('Server started on port ' + port);
