@@ -1,5 +1,6 @@
 const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
 
 const getLoginForm = (req, res) => {
   res.render('users/login');
@@ -62,8 +63,22 @@ const registerUser = (req, res) => {
     .catch(err => console.log(err));
 };
 
+const setLogin = passport.authenticate('local', {
+  successRedirect: '/posts',
+  failureRedirect: '/users/login',
+  failureFlash: true
+});
+
+const setLogout = (req, res) => {
+  req.logout(() => {
+    res.redirect('/');
+  });
+};
+
 module.exports = {
   getLoginForm,
   getRegisterForm,
-  registerUser
+  registerUser,
+  setLogin,
+  setLogout
 }
