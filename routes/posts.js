@@ -1,18 +1,19 @@
 const express = require('express');
 const router = express.Router();
+const isAuthenticated = require('../helper/accessControl');
 
 const postsController = require('../controllers/posts/postsController');
 
 router.get('/', postsController.getPosts);
 
-router.get('/create', postsController.getCreatePostForm);
+router.get('/create',  isAuthenticated, postsController.getCreatePostForm);
 
-router.post('/create', postsController.createPost);
+router.post('/create', isAuthenticated, postsController.createPost);
 
-router.get('/edit/:id', postsController.getEditPostForm);
+router.get('/edit/:id', isAuthenticated, postsController.getEditPostForm);
 
-router.put('/edit/:id', postsController.editPost);
+router.put('/edit/:id', isAuthenticated, postsController.editPost);
 
-router.delete('/delete/:id', postsController.deletePost);
+router.delete('/delete/:id', isAuthenticated, postsController.deletePost);
 
 module.exports = router;

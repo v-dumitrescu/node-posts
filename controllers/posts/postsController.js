@@ -28,7 +28,8 @@ const createPost = (req, res) => {
   } else {
     new Post({
       title,
-      content
+      content,
+      user: req.user.id
     })
       .save()
       .then(() => {
@@ -47,6 +48,10 @@ const getEditPostForm = (req, res) => {
     _id: id
   })
     .then(post => {
+      if(post.user !== req.user.id) {
+        req.flash('error_msg', 'Forbidden');
+        return res.redirect('/');
+      }
       const { title, content } = post;
       res.render('posts/post-form', {
         formTitle,
