@@ -20,7 +20,7 @@ module.exports = (passport) => {
           .then((res) => {
             if (!res) {
               return done(null, false, {
-                message: 'Invalid password!'
+                message: 'Invalid credentials!'
               });
             }
             return done(null, user);

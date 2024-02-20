@@ -1,10 +1,12 @@
 const Post = require('../../models/Post');
 
 const getPosts = (req, res) => {
+  const title = 'All posts';
   Post.find({})
     .then(posts => {
       res.render('posts/posts', {
-        posts
+        posts,
+        title
       });
     });
 }
@@ -34,7 +36,7 @@ const createPost = (req, res) => {
       .save()
       .then(() => {
         req.flash('success_msg', 'Post created!');
-        res.redirect('/posts');
+        res.redirect('/users/user-posts');
       })
       .catch(err => console.log(err));
   }
@@ -78,7 +80,7 @@ const editPost = (req, res) => {
     })
       .then(() => {
         req.flash('success_msg', 'Post updated!');
-        res.redirect('/posts');
+        res.redirect('/users/user-posts');
       })
       .catch(err => console.log(err));
   }
@@ -91,7 +93,7 @@ const deletePost = (req, res) => {
   })
     .then(() => {
       req.flash('success_msg', 'Post deleted!');
-      res.redirect('/posts')
+      res.redirect('/users/user-posts');
     })
     .catch(err => console.log(err));
 }

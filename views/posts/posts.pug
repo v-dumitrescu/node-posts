@@ -1,6 +1,7 @@
 extends ../main-layout.pug 
 
-block content 
+block content
+  h2 #{title}
   if posts.length 
     each post in posts
       .card.w-75.mb-3
