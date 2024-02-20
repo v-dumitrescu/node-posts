@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -6,6 +7,8 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const passportLoginConfig = require('./passport');
+
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
