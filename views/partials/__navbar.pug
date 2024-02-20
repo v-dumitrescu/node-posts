@@ -6,11 +6,11 @@ nav.navbar.navbar-expand-lg.bg-dark.bg-gradient.mb-4( data-bs-theme="dark")
     #navbarNav.collapse.navbar-collapse
       ul.navbar-nav
         li.nav-item
-          a.nav-link(href='/') Home
+          a.nav-link(href='/', class=path === '/' && 'active') Home
         li.nav-item
-          a.nav-link(href='/about') About
+          a.nav-link(href='/about', class=path === '/about' && 'active') About
         li.nav-item
-          a.nav-link(href='/posts') All Posts
+          a.nav-link(href='/posts', class=path === '/posts' && 'active') All Posts
       ul.navbar-nav.ms-auto.mb-2.mb-lg-0
         li.nav-item.dropdown
           a.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')| #{user ? user.firstName + ' ' + user.lastName : 'Account'}

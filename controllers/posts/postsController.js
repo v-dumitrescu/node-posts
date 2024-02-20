@@ -6,7 +6,8 @@ const getPosts = (req, res) => {
     .then(posts => {
       res.render('posts/posts', {
         posts,
-        title
+        title,
+        path: '/posts'
       });
     });
 }
