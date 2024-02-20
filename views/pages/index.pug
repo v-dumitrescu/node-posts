@@ -1,7 +1,7 @@
 extends ../main-layout.pug 
 
 block content 
-  .h-100.p-5.text-bg-dark.rounded-3
+  .h-100.p-5.text-bg-dark.bg-info.rounded-3
     h2 A Node.js web application where users can signup, login and create, update or delete posts.
     p Click on the button below to signup 
     a.btn.btn-outline-light(type='button', href=user ? '/posts/create' : '/users/login') Get started
