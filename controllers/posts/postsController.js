@@ -1,4 +1,6 @@
 const Post = require('../../models/Post');
+const { csrfSync } = require('csrf-sync');
+const { generateToken } = csrfSync();
 
 const getPosts = (req, res) => {
   const title = 'All posts';
@@ -7,7 +9,8 @@ const getPosts = (req, res) => {
       res.render('posts/posts', {
         posts,
         title,
-        path: '/posts'
+        path: '/posts',
+        token: generateToken(req)
       });
     });
 }
@@ -18,7 +21,8 @@ const getCreatePostForm = (req, res) => {
     formTitle,
     method: 'POST',
     title: req.query.title ? req.query.title : '',
-    content: req.query.content ? req.query.content : ''
+    content: req.query.content ? req.query.content : '',
+    token: generateToken(req)
   });
 }
 
@@ -61,7 +65,8 @@ const getEditPostForm = (req, res) => {
         method: 'POST',
         action: '/posts/edit/' + post._id + '?_method=PUT',
         title,
-        content
+        content,
+        token: generateToken(req)
       });
     })
     .catch(err => console.log(err));

@@ -17,6 +17,7 @@ block content
               .float-end
                 a.btn.bg-info.bg-gradient.text-white.m-2(href='/posts/edit/'+post._id) Edit
                 form.d-inline(method='POST', action='/posts/delete/'+post._id+'?_method=DELETE')
+                  input(type='hidden' name='CSRFToken' value=token)
                   button.btn.bg-danger.bg-gradient.text-white Delete
   else 
     p No posts

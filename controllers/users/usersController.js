@@ -2,6 +2,8 @@ const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const Post = require('../../models/Post');
+const { csrfSync } = require('csrf-sync');
+const { generateToken } = csrfSync();
 
 const getLoginForm = (req, res) => {
   res.render('users/login');
@@ -72,7 +74,8 @@ const getUserPosts = (req, res) => {
   .then(posts => {
     res.render('posts/posts', {
       posts,
-      title
+      title,
+      token: generateToken(req)
     });
   });
 };

@@ -5,4 +5,5 @@ form(method=method, action=action)
   .mb-3
     label.form-label(for='content') Content
     textarea#content.form-control(rows=10, name='content', required) #{content ? content : ''}
+    input(type='hidden' name='CSRFToken' value=token)
     button.btn.btn-primary(type='submit') Submit
