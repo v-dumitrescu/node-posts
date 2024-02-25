@@ -1,3 +1,6 @@
+// env variables
+require('dotenv').config();
+
 // Database connection
 require('./config/connection');
 
