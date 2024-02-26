@@ -1,6 +1,9 @@
 // env variables
 require('dotenv').config();
 
+// Cron Job
+require('./cronjob');
+
 // Database connection
 require('./config/connection');
 
