@@ -9,7 +9,7 @@ block content
           h5.card-title #{post.title}
           if post.content.length > 300 
             p.card-text #{post.content.slice(0, 300)}...
-            a.btn.btn-info.m-2.text-white(href='#') Read More
+            a.btn.btn-info.m-2.text-white(href=`/posts/post/${post._id}`) Read More
           else 
             p.card-text #{post.content}
           if user

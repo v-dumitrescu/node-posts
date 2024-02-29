@@ -15,6 +15,17 @@ const getPosts = (req, res) => {
     });
 }
 
+const getPost = (req, res) => {
+  Post.findById(req.params.id)
+    .then(post => {
+      res.render('posts/post', {
+        post,
+        token: generateToken(req)
+      });
+    })
+    .catch(err => console.log(err));
+};
+
 const getCreatePostForm = (req, res) => {
   const formTitle = 'Create Post';
   res.render('posts/post-form', {
@@ -106,6 +117,7 @@ const deletePost = (req, res) => {
 
 module.exports = {
   getPosts,
+  getPost,
   getCreatePostForm,
   createPost,
   getEditPostForm,

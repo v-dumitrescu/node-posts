@@ -12,6 +12,8 @@ const { csrfSynchronisedProtection } = csrfSync({
 
 router.get('/', postsController.getPosts);
 
+router.get('/post/:id', postsController.getPost);
+
 router.get('/create',
   isAuthenticated,
   postsController.getCreatePostForm
