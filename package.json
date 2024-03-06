@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/v-dumitrescu/node-posts.git"
+    "url": ""
   },
   "author": "Valentin Dumitrescu",
-  "license": "AGPL-3.0",
+  "license": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
